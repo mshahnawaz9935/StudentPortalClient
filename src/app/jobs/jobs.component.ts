@@ -13,25 +13,49 @@ import 'rxjs/add/operator/catch';
 export class JobsComponent implements OnInit {
 
   data;
-
+  companies;
   constructor(private http:Http ) {
 
-    this.http.get('http://localhost:50406/api/JobsAPI')
+    this.http.get('http://localhost:50406/api/CompaniesAPI')
               .map((response : Response) => response.json()).subscribe((Serverdata) => {
                 console.log('Data is ' + Serverdata );
-                this.data = Serverdata;
+                this.companies = Serverdata;
+
+                                this.http.get('http://localhost:50406/api/JobsAPI')
+                              .map((response : Response) => response.json()).subscribe((Serverdata) => {
+                                console.log('Data is ' + Serverdata );
+                                this.data = Serverdata;
+                                this.getcompany(this.data);
+                              });
+
+
               });
 
    }
+
+   getcompany(data)
+   {
+     data.forEach(job => {
+
+       for(let company of this.companies)
+       {
+         if(job.companyid == company.id)
+         job.name = company.name;
+       }
+       
+     });
+
+   }
+
 
   ngOnInit() {
   }
       
   body;
-  apply(title, description, id)
+  apply(companyid, jobid)
   { 
         console.log('here');
-        this.body = { jobid : id , studentid: '1' , companyid: '1' , applydate : '13/8/2017' };
+        this.body = {  studentid: '3000' , companyid: companyid , jobid : jobid, applydate : '13/8/2017' };
         let bodyString = JSON.stringify(this.body); // Stringify payload
         let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options       = new RequestOptions({ headers: headers }); // Create a request option
