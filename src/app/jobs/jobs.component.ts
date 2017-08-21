@@ -65,7 +65,6 @@ export class JobsComponent implements OnInit {
                          .catch((error) => Observable.throw(error.json().error || 'Server error'))
                          .subscribe((Serverdata) => {
                               console.log('Data is ' + Serverdata );
-                              this.data = Serverdata;
                         })
                           //...errors if any
    

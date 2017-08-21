@@ -8,11 +8,18 @@ import { HomeComponent } from './home/home.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { CompaniesComponent } from './companies/companies.component';
+import { AppliedjobsComponent } from './appliedjobs/appliedjobs.component';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
     { path: 'jobs', component: JobsComponent },
        { path: 'companies', component: CompaniesComponent },
+          { path: 'login', component: LoginComponent },
+             { path: 'profile', component: ProfileComponent },
+                { path: 'appliedjobs', component: AppliedjobsComponent },
+
 ];
 
 @NgModule({
@@ -21,7 +28,10 @@ const appRoutes: Routes = [
     HomeComponent,
     MenuBarComponent,
     JobsComponent,
-    CompaniesComponent
+    CompaniesComponent,
+    AppliedjobsComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

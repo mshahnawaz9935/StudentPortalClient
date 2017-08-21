@@ -5,15 +5,16 @@
                   <thead>
                     <tr>
                       <th>Title</th>
-                      <th>Email Address</th>
-					              <th>Action</th>
+                      <th>Job Description</th>
+					              <th>Company</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let job of data">
-                      <td>{{job.name}}</td>
+                    <tr *ngFor="let job of list">
+                      <td>{{job.desc}}</td>
                       <td>{{job.title}}</td>
-                      <td><button class="btn btn-success" (click) = "apply(job.companyid, job.id)">APPLY</button>
+                      <td>
+                        <b>{{job.companyname}}</b>
                        </td>
                       </tr>
                   </tbody>
