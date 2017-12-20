@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {  Http , RequestOptions, Headers, Response } from '@angular/http'; 
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  profile = {};
+  constructor(private http:Http) {
+    this.http.get('http://localhost:50406/api/StudentsAPI/3000')
+        .map((response : Response) => response.json()).subscribe((Serverdata) => {
+                                console.log('Profile Data is ' + Serverdata );
+                                this.profile = Serverdata;
+                               
+   });
+  }
 
   ngOnInit() {
   }

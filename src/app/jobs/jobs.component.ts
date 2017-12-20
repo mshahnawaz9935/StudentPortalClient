@@ -31,6 +31,22 @@ export class JobsComponent implements OnInit {
 
               });
 
+              // this.http.get('http://localhost:50406/Jobs/getdata')
+              // .map((response : Response) => response.json()).subscribe((Serverdata) => {
+              //   console.log('xml is ' + Serverdata["soap:Envelope"] );
+              //   this.renderxml(Serverdata["soap:Envelope"]);
+              // });
+
+   }
+   data1;
+   renderxml(data)
+   {
+     this.data1 = data["soap:Body"].SearchJobsResponse.SearchJobsResult.JobListItem;
+     for(let job of this.data1)
+      {
+        console.log(job);
+      }
+
    }
 
    getcompany(data)

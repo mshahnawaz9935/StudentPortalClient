@@ -5,7 +5,7 @@
                   <thead>
                     <tr>
                       <th>Title</th>
-                      <th>Email Address</th>
+                      <th>Role</th>
 					              <th>Action</th>
                     </tr>
                   </thead>
@@ -16,6 +16,12 @@
                       <td><button class="btn btn-success" (click) = "apply(job.companyid, job.id)">APPLY</button>
                        </td>
                       </tr>
+                      <tr *ngFor="let job of data1">
+                        <td>{{job.Company}}</td>
+                        <td>{{job.Title}}</td>
+                        <td><button class="btn btn-success" (click) = "apply(job.EmployerId, job.Id)">APPLY</button>
+                         </td>
+                        </tr>
                   </tbody>
 
             </table>
