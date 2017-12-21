@@ -1,14 +1,41 @@
 <div class="container" >
 <p>
-  Name : {{profile.name}}
+  Name : {{profile1.Name}}
 </p>
 <p>
-  Phone : {{profile.phone}}
+  Phone : {{profile1.PhoneNumber}}
 </p>
 <p>
-  Address : {{profile.address}}
+  Address : {{profile1.Address}}
 </p>
-<p>
-  College : {{profile.college}}
-</p>
+
+
+
+<form >
+  <h2 class="text-center mb-4">Edit Profile</h2>
+
+  <div class="md-form">
+      <i class="fa fa-user prefix grey-text"></i>
+      <input type="text" id="orangeForm-name" class="form-control" name="name" [(ngModel)]="profile.name">
+      <label for="orangeForm-name">Your name</label>
+  </div>
+  <div class="md-form">
+      <i class="fa fa-envelope prefix grey-text"></i>
+      <input type="text" id="orangeForm-email" class="form-control" name="PhoneNumber" [(ngModel)]="profile.PhoneNumber">
+      <label for="orangeForm-email">Your Phone</label>
+  </div>
+
+  <div class="md-form">
+      <i class="fa fa-lock prefix grey-text"></i>
+      <input type="text" id="orangeForm-pass" class="form-control" name="Address" [(ngModel)]="profile.Address">
+      <label for="orangeForm-pass">Your Address</label>
+  </div>
+
+  <div class="text-center">
+      <button class="btn btn-deep-orange" (click)= "profile_data(profile.name,profile.PhoneNumber,profile.Address)" >Save Profile</button>
+      <br>
+      <br>
+  </div>
+
+</form>
 </div>

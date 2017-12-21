@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import {User} from './User';
 import {URLSearchParams} from '@angular/http';
+import { DataService} from '../DataService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   model = new User('', '');
   show= true;
-  constructor(private http:Http) { }
+  constructor(private http:Http, private DataService:DataService,private router:Router) { }
 
   ngOnInit() {
   }
@@ -53,6 +55,8 @@ export class LoginComponent implements OnInit {
                    //  .catch((error) => Observable.throw(error.json().error || 'Server error'))
                      .subscribe((Serverdata) => {
                           console.log('Data is ' + Serverdata.access_token );
+                          this.DataService.access_token =  Serverdata.access_token;
+                          this.router.navigate(['/profile']);
                     })
   }
 }
