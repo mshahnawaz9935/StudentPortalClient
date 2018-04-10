@@ -16,16 +16,16 @@ companies;
 jobs;
     constructor(private http:Http ) {
 
-    this.http.get('http://localhost:50406/api/AppliedJobsAPI')
+    this.http.get('http://localhost:55899/api/AppliedJobsAPI')
               .map((response : Response) => response.json()).subscribe((Serverdata) => {
                 this.applied = Serverdata;
 
-                     this.http.get('http://localhost:50406/api/JobsAPI')
+                     this.http.get('http://localhost:55899/api/JobsAPI')
                               .map((response : Response) => response.json()).subscribe((Serverdata) => {
     
                                 this.jobs = Serverdata;
 
-                  this.http.get('http://localhost:50406/api/CompaniesAPI')
+                  this.http.get('http://localhost:55899/api/CompaniesAPI')
                               .map((response : Response) => response.json()).subscribe((Serverdata) => {
                                 this.companies = Serverdata;
                                  this.getdetails(this.applied , this.jobs, this.companies);

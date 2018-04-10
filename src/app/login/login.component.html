@@ -30,13 +30,9 @@
     <div class="md-form">
         <i class="fa fa-user prefix grey-text"></i>
         <input type="text" id="orangeForm-name" class="form-control" name="username" [(ngModel)]="model.username">
-        <label for="orangeForm-name">Your name</label>
+        <label for="orangeForm-name">Your Email</label>
     </div>
-    <div class="md-form">
-        <i class="fa fa-envelope prefix grey-text"></i>
-        <input type="text" id="orangeForm-email" class="form-control">
-        <label for="orangeForm-email">Your email</label>
-    </div>
+   
 
     <div class="md-form">
         <i class="fa fa-lock prefix grey-text"></i>
@@ -44,12 +40,31 @@
         <label for="orangeForm-pass">Your password</label>
     </div>
 
+    <div class="md-form">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input type="password" name="confirm_password" id="orangeForm-email" class="form-control" [(ngModel)]="model.confirm_password">
+        <label for="orangeForm-email">Your Confirm password</label>
+    </div>
+    <br>
+    
+    <div class="form-check">
+        Are you a&nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input name="role" value="Student" type="radio" class="with-gap" [(ngModel)]="model.role" >
+        <label for="radio106">Student</label>&nbsp;&nbsp;
+
+        <input name="role" value="Employer" type="radio" class="with-gap"  [(ngModel)]="model.role">
+        <label for="radio107">Employer</label>
+    </div>
+    
+   
+
     <div class="text-center">
-        <button class="btn btn-deep-orange" (click)="post_data(model.username, model.password)" >Sign up</button>
+        <button class="btn btn-deep-orange" (click)="post_data(model.username, model.password,model.confirm_password, model.role)" >Sign up</button>
         <br>
         <br>
         <h4><a (click)="show = true">Click here to go to Login Page</a></h4>
     </div>
+
 
 </form>
 

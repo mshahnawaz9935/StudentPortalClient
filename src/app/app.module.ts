@@ -12,14 +12,15 @@ import { AppliedjobsComponent } from './appliedjobs/appliedjobs.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DataService} from './DataService';
+import { AuthGuard } from './AuthGuard';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent  },
   { path: 'home', component: HomeComponent },
     { path: 'jobs', component: JobsComponent },
        { path: 'companies', component: CompaniesComponent },
           { path: 'login', component: LoginComponent },
-             { path: 'profile', component: ProfileComponent },
+             { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
                 { path: 'appliedjobs', component: AppliedjobsComponent },
 
 ];
@@ -41,7 +42,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [DataService],
+  providers: [DataService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

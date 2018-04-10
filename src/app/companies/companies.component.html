@@ -1,3 +1,41 @@
-<p>
-  companies works!
-</p>
+
+<div class="container" >
+    <p>
+        Name : {{company1.name}}
+      </p>
+      <p>
+        Email : {{company1.email}}
+      </p>
+      <p>
+        About : {{company1.about}}
+      </p>
+  <form>
+    <h2 class="text-center mb-4">Create/Edit Company</h2>
+  
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" id="orangeForm-name" class="form-control" name="name" [(ngModel)]="Company.name">
+        <label for="orangeForm-name">Company name</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input type="text" id="orangeForm-email" class="form-control" name="email" [(ngModel)]="Company.email">
+        <label for="orangeForm-email">Email</label>
+    </div>
+  
+    <div class="md-form">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input type="text" id="orangeForm-pass" class="form-control" name="about" [(ngModel)]="Company.about">
+        <label for="orangeForm-pass">About</label>
+    </div>
+  
+    <div class="text-center">
+        <button class="btn btn-deep-orange" (click)= "post_data(Company.name,Company.email,Company.about)" >Create / Company Save Details</button>
+        <button class="btn btn-deep-orange" >View Jobs in {{company1.name}}</button>
+        <br>
+        <br>
+    </div>
+  </form>
+  
+</div>

@@ -6,6 +6,9 @@ import { Observable } from 'rxjs/Observable';
 export class DataService {
 
 access_token = '';
+UserId = '';
+
+loggedIN = false;
     constructor(private http: Http) {
 
         

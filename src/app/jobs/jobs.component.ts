@@ -16,12 +16,12 @@ export class JobsComponent implements OnInit {
   companies;
   constructor(private http:Http ) {
 
-    this.http.get('http://localhost:50406/api/CompaniesAPI')
+    this.http.get('http://localhost:55899/api/CompaniesAPI')
               .map((response : Response) => response.json()).subscribe((Serverdata) => {
                 console.log('Data is ' + Serverdata );
                 this.companies = Serverdata;
 
-                                this.http.get('http://localhost:50406/api/JobsAPI')
+                                this.http.get('http://localhost:55899/api/JobsAPI')
                               .map((response : Response) => response.json()).subscribe((Serverdata) => {
                                 console.log('Data is ' + Serverdata );
                                 this.data = Serverdata;
@@ -76,7 +76,7 @@ export class JobsComponent implements OnInit {
         let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-        this.http.post('http://localhost:50406/api/AppliedJobsAPI', this.body, options) // ...using post request
+        this.http.post('http://localhost:55899/api/AppliedJobsAPI', this.body, options) // ...using post request
                          .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
                          .catch((error) => Observable.throw(error.json().error || 'Server error'))
                          .subscribe((Serverdata) => {

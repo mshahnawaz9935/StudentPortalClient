@@ -15,17 +15,23 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  model = new User('', '');
+  model = new User('', '','','');
   show= true;
   constructor(private http:Http, private DataService:DataService,private router:Router) { }
 
   ngOnInit() {
   }
   body;
-  post_data(username,password)
+  post_data(username,password,confirm_password,role)
   {
-    console.log('name is', username,password);
-    this.body = {  Email: username , Password: password ,ConfirmPassword : password};
+    console.log('name is', username,password, role);
+    if(password == confirm_password)
+      {
+    this.body = {  Email: username , Password: password ,
+      ConfirmPassword : password,
+      Role : role
+    
+    };
     let bodyString = JSON.stringify(this.body); // Stringify payload
     console.log(bodyString);
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -37,6 +43,8 @@ export class LoginComponent implements OnInit {
                      .subscribe((Serverdata) => {
                           console.log('Data is ' + Serverdata );
                     })
+                  }
+                  else alert('Password do not match');
   }
   get_data(username,password){
 
@@ -46,7 +54,7 @@ export class LoginComponent implements OnInit {
     body.set('password', password);
     body.set('grant_type', 'password');
    // let bodyString = JSON.stringify(this.body); // Stringify payload
-    console.log(body);
+    console.log(body );
     let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
@@ -56,6 +64,7 @@ export class LoginComponent implements OnInit {
                      .subscribe((Serverdata) => {
                           console.log('Data is ' + Serverdata.access_token );
                           this.DataService.access_token =  Serverdata.access_token;
+                          this.DataService.loggedIN = true;
                           this.router.navigate(['/profile']);
                     })
   }

@@ -3,6 +3,10 @@ import {  Http , RequestOptions, Headers, Response } from '@angular/http';
 import { Profile } from './Profile';
 import { URLSearchParams} from '@angular/http';
 import { DataService} from '../DataService';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Component({
   selector: 'app-profile',
@@ -11,12 +15,18 @@ import { DataService} from '../DataService';
 })
 export class ProfileComponent implements OnInit {
 
-  profile1 = {};
+  role = false;
+  profile1 ={ Name: '', Address: '', PhoneNumber:'',Role:''};
   profile = new Profile('','','');
   constructor(private http:Http , private DataService:DataService) {
 
-    console.log(this.DataService.access_token);
     this.get_profile();
+    
+    setTimeout(()=>
+  {
+    console.log(this.DataService.access_token,' ID ',this.DataService.UserId);
+  },2000);
+   
   }
 
   ngOnInit() {
@@ -36,10 +46,11 @@ export class ProfileComponent implements OnInit {
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
     this.http.post('http://localhost:55899/api/Account/EditProfile', body, options) // ...using post request
-                     .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-                   //  .catch((error) => Observable.throw(error.json().error || 'Server error'))
+                     .map((res:Response) => res) // ...and calling .json() on the response to return data
+                     .catch((error) => Observable.throw(error.error || 'Server error'))
                      .subscribe((Serverdata) => {
                           console.log('Data is ' + Serverdata );
+                          this.get_profile();
                     })
   }
 
@@ -51,8 +62,12 @@ export class ProfileComponent implements OnInit {
 
     this.http.get('http://localhost:55899/api/Account/UserInfo', options)
         .map((response : Response) => response.json()).subscribe((Serverdata) => {
-                                console.log('Profile Data is ' + Serverdata );
+                                console.log('Profile Data is ' + Serverdata , Serverdata.Id);
                                 this.profile1 = Serverdata;
+                                this.DataService.UserId = Serverdata.Id;
+
+                                if(this.profile1.Role == 'Employer')
+                                  this.role = true;
                                 
    });
   }
