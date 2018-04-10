@@ -17,7 +17,10 @@ import { Company } from './Company';
 
 export class CompaniesComponent implements OnInit {
 
-  company1 = { name : '', email :'', about:''};
+  company1 = { comp_id : 0 ,name : '', email :'', about:''};
+  show = false;
+
+  company_id;
   constructor(private http:Http , private DataService:DataService) {
 
     this.getcompany(this.DataService.UserId);
@@ -25,7 +28,7 @@ export class CompaniesComponent implements OnInit {
 
   ngOnInit() {
   }
-  Company = new Company('','','');
+  Company = new Company(0,'','','');
   body;
   post_data( name, email, about)
   {
@@ -58,9 +61,25 @@ getcompany(Emp_Id)
       .map((response : Response) => response.json()).subscribe((Serverdata) => {
                               console.log('Profile Data is ' + Serverdata , Serverdata.Id);
                               this.company1 = Serverdata;
+                              this.company_id = Serverdata.id;
+                              console.log('Company id', this.company_id);
+
+                              
+ });
+}
+showjobs()
+{
+  this.show = true;
+  let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
+  , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); 
+  let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+  this.http.get('http://localhost:55899/api/CompaniesAPI/GetCompany_ByEmp_Id/', options)
+      .map((response : Response) => response.json()).subscribe((Serverdata) => {
+                              console.log('Profile Data is ' + Serverdata , Serverdata.Id);
+                              this.company1 = Serverdata;
                           
                               
  });
 }
 }
-  

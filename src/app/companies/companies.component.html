@@ -10,6 +10,33 @@
         About : {{company1.about}}
       </p>
   <form>
+        <div *ngIf="show" class="row">
+                <table id="table" class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Role</th>
+                                  <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let job of data">
+                      <td>{{job.name}}</td>
+                      <td>{{job.title}}</td>
+                      <td><button class="btn btn-success" (click) = "apply(job.companyid, job.id)">APPLY</button>
+                       </td>
+                      </tr>
+                      <tr *ngFor="let job of data1">
+                        <td>{{job.Company}}</td>
+                        <td>{{job.Title}}</td>
+                        <td><button class="btn btn-success" (click) = "apply(job.EmployerId, job.Id)">APPLY</button>
+                         </td>
+                        </tr>
+                  </tbody>
+            
+            </table>
+            </div>
+     <div *ngIf="!show">       
     <h2 class="text-center mb-4">Create/Edit Company</h2>
   
     <div class="md-form">
@@ -29,13 +56,17 @@
         <input type="text" id="orangeForm-pass" class="form-control" name="about" [(ngModel)]="Company.about">
         <label for="orangeForm-pass">About</label>
     </div>
-  
-    <div class="text-center">
-        <button class="btn btn-deep-orange" (click)= "post_data(Company.name,Company.email,Company.about)" >Create / Company Save Details</button>
-        <button class="btn btn-deep-orange" >View Jobs in {{company1.name}}</button>
+
+     </div>
+  </form>
+    
+  <div class="text-center">
+        <button *ngIf="!show" class="btn btn-deep-orange" (click)= "post_data(Company.name,Company.email,Company.about)" >Create / Company Save Details</button>
+        <button *ngIf="show" class="btn btn-deep-orange" >BACK</button>
+        <button *ngIf="!show" (click)="showjobs()" class="btn btn-deep-orange" >View Jobs in {{company1.name}}</button>
         <br>
         <br>
     </div>
-  </form>
+  
   
 </div>
