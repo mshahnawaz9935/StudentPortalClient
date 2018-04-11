@@ -18,8 +18,9 @@ import { Company } from './Company';
 export class CompaniesComponent implements OnInit {
 
   company1 = { comp_id : 0 ,name : '', email :'', about:''};
-  show = false;
-
+  showjob = false;
+  showcompany = true;
+  jobsdata=[];
   company_id;
   constructor(private http:Http , private DataService:DataService) {
 
@@ -69,17 +70,25 @@ getcompany(Emp_Id)
 }
 showjobs()
 {
-  this.show = true;
+  this.showjob = false;
+  this.showcompany = false;
   let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
   , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); 
   let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-  this.http.get('http://localhost:55899/api/CompaniesAPI/GetCompany_ByEmp_Id/', options)
+  this.http.get('http://localhost:55899/api/JobsAPI/GetJobByCompany/'+ this.company_id, options)
       .map((response : Response) => response.json()).subscribe((Serverdata) => {
-                              console.log('Profile Data is ' + Serverdata , Serverdata.Id);
-                              this.company1 = Serverdata;
-                          
-                              
+                              console.log('Jobs Data is ' + Serverdata);
+                              this.jobsdata = Serverdata;                         
  });
 }
+
+togglejobs = false;
+postjobs()
+{
+  this.togglejobs = true;
+  this.showjob = false;
+  this.showcompany = false;
+}
+
 }

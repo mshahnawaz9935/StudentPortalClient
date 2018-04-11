@@ -1,16 +1,40 @@
 
-<div class="container" >
-    <p>
-        Name : {{company1.name}}
-      </p>
-      <p>
-        Email : {{company1.email}}
-      </p>
-      <p>
-        About : {{company1.about}}
-      </p>
-  <form>
-        <div *ngIf="show" class="row">
+   <div class="container" >
+   <div *ngIf="togglejobs">       
+        <h2 class="text-center mb-4">Create/Edit Jobs</h2>
+      
+        <div class="md-form">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input type="text" id="orangeForm-name" class="form-control" name="name" [(ngModel)]="Company.name">
+            <label for="orangeForm-name">Company name</label>
+        </div>
+    
+        <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="text" id="orangeForm-email" class="form-control" name="email" [(ngModel)]="Company.email">
+            <label for="orangeForm-email">Email</label>
+        </div>
+      
+        <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="text" id="orangeForm-pass" class="form-control" name="about" [(ngModel)]="Company.about">
+            <label for="orangeForm-pass">About</label>
+        </div>
+    
+         </div>
+
+  <form *ngIf="showcompany">
+        <p>
+                Name : {{company1.name}}
+              </p>
+              <p>
+                Email : {{company1.email}}
+              </p>
+              <p>
+                About : {{company1.about}}
+              </p>
+        <div *ngIf="showjob"  class="row">
+               
                 <table id="table" class="table table-striped table-bordered">
                   <thead>
                     <tr>
@@ -20,23 +44,17 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let job of data">
-                      <td>{{job.name}}</td>
+                    <tr *ngFor="let job of jobsdata">
                       <td>{{job.title}}</td>
+                      <td>{{job.description}}</td>
                       <td><button class="btn btn-success" (click) = "apply(job.companyid, job.id)">APPLY</button>
                        </td>
                       </tr>
-                      <tr *ngFor="let job of data1">
-                        <td>{{job.Company}}</td>
-                        <td>{{job.Title}}</td>
-                        <td><button class="btn btn-success" (click) = "apply(job.EmployerId, job.Id)">APPLY</button>
-                         </td>
-                        </tr>
                   </tbody>
             
             </table>
             </div>
-     <div *ngIf="!show">       
+     <div *ngIf="showcompany">       
     <h2 class="text-center mb-4">Create/Edit Company</h2>
   
     <div class="md-form">
@@ -62,11 +80,12 @@
     
   <div class="text-center">
         <button *ngIf="!show" class="btn btn-deep-orange" (click)= "post_data(Company.name,Company.email,Company.about)" >Create / Company Save Details</button>
+        <button *ngIf="!show" class="btn btn-deep-orange" (click)="postjobs()" >Create / Jobs in {{company1.name}}</button>
         <button *ngIf="show" class="btn btn-deep-orange" >BACK</button>
         <button *ngIf="!show" (click)="showjobs()" class="btn btn-deep-orange" >View Jobs in {{company1.name}}</button>
         <br>
         <br>
     </div>
   
-  
-</div>
+  </div>
+
