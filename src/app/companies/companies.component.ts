@@ -63,6 +63,7 @@ getcompany(Emp_Id)
                               console.log('Profile Data is ' + Serverdata , Serverdata.Id);
                               this.company1 = Serverdata;
                               this.company_id = Serverdata.id;
+                              this.Company = this.company1;
                               console.log('Company id', this.company_id);
 
                               
