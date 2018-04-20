@@ -7,6 +7,7 @@ export class DataService {
 
 access_token = '';
 UserId = '';
+candidateid= '';
 
 loggedIN = false;
     constructor(private http: Http) {

@@ -18,11 +18,10 @@ import { Company } from './Company';
 export class CompaniesComponent implements OnInit {
 
   company1 = { comp_id : 0 ,name : '', email :'', about:''};
-  showjob = false;
-  showcompany = true;
   jobsdata=[];
   company_id;
-  constructor(private http:Http , private DataService:DataService) {
+  show = true;
+  constructor(private http:Http , private DataService:DataService, private router:Router) {
 
     this.getcompany(this.DataService.UserId);
    }
@@ -71,8 +70,6 @@ getcompany(Emp_Id)
 }
 showjobs()
 {
-  this.showjob = false;
-  this.showcompany = false;
   let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
   , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); 
   let options       = new RequestOptions({ headers: headers }); // Create a request option
@@ -87,9 +84,23 @@ showjobs()
 togglejobs = false;
 postjobs()
 {
-  this.togglejobs = true;
-  this.showjob = false;
-  this.showcompany = false;
+  this.show = false;
 }
+status = '';
+deletejobs(id)
+{
+
+  this.http.delete('http://localhost:55899/api/JobsAPI/' + id).map((response : Response) => response.json()).subscribe((data) => {
+    console.log('Jobs Deleted status is ' + data);   
+    this.status = data;
+
+  });
+}
+view_candidates(id)
+{
+  this.router.navigate(['/candidates']);
+  this.DataService.candidateid  = id;
+}
+
 
 }

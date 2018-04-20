@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DataService} from './DataService';
 import { AuthGuard } from './AuthGuard';
+import { CandidatesComponent } from './candidates/candidates.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent  },
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
           { path: 'login', component: LoginComponent },
              { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
                 { path: 'appliedjobs', component: AppliedjobsComponent },
+                { path: 'candidates', component: CandidatesComponent },
 
 ];
 
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     CompaniesComponent,
     AppliedjobsComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    CandidatesComponent
   ],
   imports: [
     BrowserModule,
