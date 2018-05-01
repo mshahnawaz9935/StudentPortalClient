@@ -1,4 +1,6 @@
+
 <div class="container" >
+
 <section class="text-center pb-5">
     <h1 class="h1 pt-4">Manage Your Profile</h1>
 
@@ -9,16 +11,19 @@
                     <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" class="rounded-circle img-fluid" alt="First sample avatar image">
 
                 </div>
-          
+          <br>
                 <p>
                     <i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae
                     quaerat ad velit ab. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore cum accusamus eveniet
                     molestias voluptatum inventore laboriosam labore sit, aspernatur praesentium iste impedit quidem dolor
                     veniam. <i class="fa fa-quote-right"></i></p><a data-toggle="modal" data-target="#orangeModalSubscription"><i class="fa fa-edit fa-3x" aria-hidden="true"></i></a>
 
-
+                    <h4>Shah Nawaz</h4>
+                    <h6>087542358</h6>
+                    <h6>Trinity College Dublin</h6>
                 <h4>{{profile1.Name}}</h4>
                 <h6>{{profile1.PhoneNumber}}</h6>
+                <h6>{{profile1.Address}}</h6>
 
                 <!--Review-->
                 <i class="fa fa-star"> </i>
@@ -28,47 +33,37 @@
                 <i class="fa fa-star-half-full"> </i>
             </div>
 </section>
+<!--Panel-->
 
-
-<p>
-  Name : {{profile1.Name}}
-</p>
-<p>
-  Phone : {{profile1.PhoneNumber}}
-</p>
-<p>
-  Address : {{profile1.Address}}
-</p>
-
-<h5 *ngIf="role == true"><a>Create/View your Company and Post Jobs</a></h5>
-
-<form >
-  <h2 class="text-center mb-4">Edit Profile</h2>
-
-  <div class="md-form">
-      <i class="fa fa-user prefix grey-text"></i>
-      <input type="text" id="orangeForm-name" class="form-control" name="name" [(ngModel)]="profile.name">
-      <label for="orangeForm-name">Your name</label>
-  </div>
-  <div class="md-form">
-      <i class="fa fa-envelope prefix grey-text"></i>
-      <input type="text" id="orangeForm-email" class="form-control" name="PhoneNumber" [(ngModel)]="profile.PhoneNumber">
-      <label for="orangeForm-email">Your Phone</label>
-  </div>
-
-  <div class="md-form">
-      <i class="fa fa-lock prefix grey-text"></i>
-      <input type="text" id="orangeForm-pass" class="form-control" name="Address" [(ngModel)]="profile.Address">
-      <label for="orangeForm-pass">Your Address</label>
-  </div>
-
-  <div class="text-center">
-      <button class="btn btn-deep-orange" (click)= "profile_data(profile.name,profile.PhoneNumber,profile.Address)" >Save Profile</button>
-      <br>
-      <br>
-  </div>
-
-</form>
+<div class="card text-center">
+    <div class="card-header">
+            <h4 class="card-title"><a>Add Your Work Experience</a></h4>
+    </div>
+    <div class="card-body">
+        <p class="card-text">...</p>
+ 
+        <div class="md-form">
+            <a data-toggle="modal" data-target="#ExpModal"><i class="fa fa-pencil prefix"></i></a>
+            <textarea type="text" id="textareaPrefix" class="form-control md-textarea" rows="3"></textarea>
+            <label for="textareaPrefix">Fill out your experience</label>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="card text-center">
+        <div class="card-header">
+                <h4 class="card-title"><a>Education</a></h4>
+        </div>
+        <div class="card-body">
+            <p class="card-text">...</p>
+     
+            <div class="md-form">
+                  <a data-toggle="modal" data-target="#EducationModal"><i class="fa fa-pencil prefix"></i></a>
+                <textarea type="text" id="textareaPrefix" class="form-control md-textarea" rows="3"></textarea>
+                <label for="textareaPrefix">Education</label>
+            </div>
+        </div>
+    </div>
 
 <div class="modal fade" id="orangeModalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-warning" role="document">
@@ -76,7 +71,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header text-center">
-                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Subscribe</h4>
+                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Edit Basic Info</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
@@ -86,27 +81,146 @@
             <div class="modal-body">
                 <div class="md-form mb-5">
                     <i class="fa fa-user prefix grey-text"></i>
-                    <input type="text" id="form3" class="form-control validate">
+                    <input type="text" id="form3" class="form-control validate" name="name" [(ngModel)]="profile.name">
                     <label data-error="wrong" data-success="right" for="form3">Your name</label>
                 </div>
 
+                <div class="md-form">  
+                    <i class="fa fa-bank prefix grey-text" aria-hidden="true"></i>
+
+                    <input type="text" id="form2" class="form-control validate" name="Address" [(ngModel)]="profile.Address">
+                    <label data-error="wrong" data-success="right" for="form2">Your address</label>
+                </div>
                 <div class="md-form">
-                    <i class="fa fa-envelope prefix grey-text"></i>
-                    <input type="email" id="form2" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form2">Your email</label>
+                    <i class="fa fa-mobile-phone prefix grey-text" aria-hidden="true"></i>
+                    <input type="text" id="form3" class="form-control validate" name="PhoneNumber" [(ngModel)]="profile.PhoneNumber">
+                    <label data-error="wrong" data-success="right" for="form1">Your Phone</label>
                 </div>
             </div>
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-                <a type="button" class="btn btn-outline-warning waves-effect">Send <i class="fa fa-paper-plane-o ml-1"></i></a>
+                <a type="button" (click)= "profile_data(profile.name,profile.PhoneNumber,profile.Address)" class="btn btn-outline-warning waves-effect">SAVE <i class="fa fa-paper-plane-o ml-1"></i></a>
             </div>
         </div>
     </div>
 </div>
+ 
+<!-- Experience Modal -->
+<div class="modal fade" id="ExpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-backdrop="false">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-notify modal-info" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Experience
+        </p>
 
-<div class="text-center">
-    <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#orangeModalSubscription">Launch modal Subscription</a>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-desktop fa-4x mb-3 animated rotateIn"></i>
+          <p>
+            <strong>Work Experience</strong>
+          </p>
+          <p>Let the employers know about your experience.
+            <strong>Make them notice.</strong>
+          </p>
+        </div>
+        <div class="md-form">
+                <input type="text" id="title" class="md-textarea form-control" />
+                <label for="title">Title</label>
+              </div>
+        <div class="md-form">
+            <input type="text" id="title" class="md-textarea form-control" />
+             <label for="title">Company</label>
+         </div>
+         <div class="md-form">
+                <input type="text" id="title" class="md-textarea form-control" />
+                 <label for="title">Location</label>
+             </div>
+        <div class="md-form">
+          <textarea type="text" id="form79textarea" class="md-textarea form-control" rows="3"></textarea>
+          <label for="form79textarea">Description</label>
+        </div>
+
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-primary waves-effect waves-light">Save
+          <i class="fa fa-paper-plane ml-1"></i>
+        </a>
+        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal: Experience -->
+
+<!-- Education Modal -->
+<div class="modal fade" id="EducationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-backdrop="false">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-notify modal-info" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Education
+        </p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-file-text-o fa-4x mb-3 animated rotateIn"></i>
+          <p>
+            <strong>Education</strong>
+          </p>
+          <p>Describe your educational background.
+            <strong>Make them notice.</strong>
+          </p>
+        </div>
+        <div class="md-form">
+                <input type="text" id="school" class="md-textarea form-control" />
+                <label for="title">School</label>
+              </div>
+        <div class="md-form">
+            <input type="text" id="degree" class="md-textarea form-control" />
+             <label for="title">Degree</label>
+         </div>
+         <div class="md-form">
+                <input type="text" id="field" class="md-textarea form-control" />
+                 <label for="title">Field of Study</label>
+             </div>
+             <div class="md-form">
+                    <input type="text" id="grade" class="md-textarea form-control" />
+                     <label for="title">Field of Grade</label>
+                 </div>
+        <div class="md-form">
+          <textarea type="text" id="form79textarea" class="md-textarea form-control" rows="3"></textarea>
+          <label for="form79textarea">Description</label>
+        </div>
+
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" class="btn btn-primary waves-effect waves-light">Save
+          <i class="fa fa-paper-plane ml-1"></i>
+        </a>
+        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Cancel</a>
+      </div>
+    </div>
+  </div>
 </div>
 
     
