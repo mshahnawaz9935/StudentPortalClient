@@ -21,7 +21,7 @@ const appRoutes: Routes = [
     { path: 'jobs', component: JobsComponent },
        { path: 'companies', component: CompaniesComponent },
           { path: 'login', component: LoginComponent },
-             { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+             { path: 'profile', component: ProfileComponent },// canActivate: [AuthGuard] },
                 { path: 'appliedjobs', component: AppliedjobsComponent },
                 { path: 'candidates', component: CandidatesComponent },
 

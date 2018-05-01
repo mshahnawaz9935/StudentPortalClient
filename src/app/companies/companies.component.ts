@@ -98,8 +98,9 @@ deletejobs(id)
 }
 view_candidates(id)
 {
+  this.DataService.jobid  = id;
   this.router.navigate(['/candidates']);
-  this.DataService.candidateid  = id;
+
 }
 
 

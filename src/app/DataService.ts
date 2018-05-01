@@ -7,6 +7,7 @@ export class DataService {
 
 access_token = '';
 UserId = '';
+jobid='';
 candidateid= '';
 
 loggedIN = false;
