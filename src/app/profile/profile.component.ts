@@ -71,5 +71,47 @@ export class ProfileComponent implements OnInit {
                                 
    });
   }
+  post_experience(name, PhoneNumber,Address)
+  {
+    console.log('name is', name,Address, PhoneNumber);
+    const body = new URLSearchParams();
+    body.set('Name', name);
+    body.set('PhoneNumber', PhoneNumber);
+    body.set('Address', Address);
+   // let bodyString = JSON.stringify(this.body); // Stringify payload
+    console.log(body);
+    let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
+    , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); // ... Set content type to JSON
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+    this.http.post('http://localhost:55899/api/Account/EditProfile', body, options) // ...using post request
+                     .map((res:Response) => res) // ...and calling .json() on the response to return data
+                     .catch((error) => Observable.throw(error.error || 'Server error'))
+                     .subscribe((Serverdata) => {
+                          console.log('Data is ' + Serverdata );
+                          this.get_profile();
+                    })
+  }
+  post_education(name, PhoneNumber,Address)
+  {
+    console.log('name is', name,Address, PhoneNumber);
+    const body = new URLSearchParams();
+    body.set('Name', name);
+    body.set('PhoneNumber', PhoneNumber);
+    body.set('Address', Address);
+   // let bodyString = JSON.stringify(this.body); // Stringify payload
+    console.log(body);
+    let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
+    , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); // ... Set content type to JSON
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+    this.http.post('http://localhost:55899/api/Account/EditProfile', body, options) // ...using post request
+                     .map((res:Response) => res) // ...and calling .json() on the response to return data
+                     .catch((error) => Observable.throw(error.error || 'Server error'))
+                     .subscribe((Serverdata) => {
+                          console.log('Data is ' + Serverdata );
+                          this.get_profile();
+                    })
+  }
 
 }
