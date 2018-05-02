@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {  Http , RequestOptions, Headers, Response } from '@angular/http'; 
 import { Profile } from './Profile';
+import { Experience } from './Experience';
+import { Education } from './Education';
 import { URLSearchParams} from '@angular/http';
 import { DataService} from '../DataService';
 import {Observable} from 'rxjs/Observable';
@@ -17,6 +19,9 @@ export class ProfileComponent implements OnInit {
 
   role = false;
   profile1 ={ Name: '', Address: '', PhoneNumber:'',Role:''};
+  experience = new Experience('','','','',false);
+  education = new Education('','','','','');
+
   profile = new Profile('','','');
   constructor(private http:Http , private DataService:DataService) {
 
@@ -71,20 +76,22 @@ export class ProfileComponent implements OnInit {
                                 
    });
   }
-  post_experience(name, PhoneNumber,Address)
+  post_experience(title, company,location,description)
   {
-    console.log('name is', name,Address, PhoneNumber);
+    console.log('name is', title, company,location,description);
     const body = new URLSearchParams();
-    body.set('Name', name);
-    body.set('PhoneNumber', PhoneNumber);
-    body.set('Address', Address);
+    body.set('title', title);
+    body.set('company', company);
+    body.set('location', location);
+    body.set('description', description);
+    body.has('currentjob');
    // let bodyString = JSON.stringify(this.body); // Stringify payload
     console.log(body);
     let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
     , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-    this.http.post('http://localhost:55899/api/Account/EditProfile', body, options) // ...using post request
+    this.http.post('http://localhost:55899/api/ExperiencesAPI', body, options) // ...using post request
                      .map((res:Response) => res) // ...and calling .json() on the response to return data
                      .catch((error) => Observable.throw(error.error || 'Server error'))
                      .subscribe((Serverdata) => {
