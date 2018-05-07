@@ -1,5 +1,38 @@
-
    <div class="container" >
+        <div class="modal fade" id="AddJobsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Create New Job Role</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-5">
+                                <i class="fa fa-user prefix grey-text"></i>
+                                <input type="text" id="orangeForm-name" class="form-control validate" name="company" [(ngModel)]="Company.name"  >
+                                <label data-error="wrong" data-success="right" for="orangeForm-name">Job Title</label>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="email" id="orangeForm-email" class="form-control validate" name="email" [(ngModel)]="Company.email"  >
+                                <label data-error="wrong" data-success="right" for="orangeForm-email">Description</label>
+                            </div>
+            
+                            <div class="md-form mb-4">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="orangeForm-pass" class="form-control validate" name="about" [(ngModel)]="Company.about"  >
+                                <label data-error="wrong" data-success="right" for="orangeForm-pass">About</label>
+                            </div>
+            
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-deep-orange" (click)= "post_data(Company.name,Company.email,Company.about)">Edit And Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
        <div *ngIf="show" >
         <div class="modal fade" id="CompanyEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -41,57 +74,29 @@
         <h2 class="text-center h1 my-5">
             <strong>Company Information</strong>
         </h2>
-        <p class="px-xl-5 text-center grey-text mb-5">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p class="px-xl-5 text-center grey-text mb-5">Manage your Company page. This page will be displayed to students and other companies.</p>
         
-        <div class="row">
-        
-            <div class="col-lg-6 col-xl-5 pr-lg-5 pb-5">
-        
-                <img src="https://mdbootstrap.com/img/Photos/Others/images/83.jpg" alt="Sample project image" class="img-fluid rounded z-depth-1">
-        
-            </div>
-
-            <div class="col-lg-6 col-xl-7 pl-lg-5 pb-4">
-        
-                <div class="row mb-3">
-                    <div class="col-1 mr-1">
-                        <i class="fa fa-book fa-2x cyan-text"></i>
+            <div class="card text-left" >
+                    <div class="card-header">
+                            <h4 class="card-title"><a>Details</a></h4>
                     </div>
-                    <div class="col-10">
-                        <h5 class="font-weight-bold">Name</h5>
-                        <p class="grey-text"><br>{{company1.name}}</p>
+                    <div class="row">
+                    <div class="col-md-10">
+                        <h4 class="card-body">{{company1.name}}</h4>
+                        <p class="card-body"> HeadQuarters : Dublin</p>
                     </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-1 mr-1">
-                        <i class="fa fa-code fa-2x red-text"></i>
+                    <div class="col-md-2">
+                        <a  class="card-body text-right" data-toggle="modal" data-target="#CompanyEditModal"><i style="margin-top:15px;" class="fa fa-pencil prefix fa-2x"></i></a>
                     </div>
-                    <div class="col-10 ">
-                        <h5 class="font-weight-bold">About</h5>
-                        <p class="grey-text"><br>{{company1.about}}</p>
-                    </div>
-                </div>
-    
-                <div class="row">
-                    <div class="col-1 mr-1">
-                        <i class="fa fa-money fa-2x deep-purple-text"></i>
-                    </div>
-                    <div class="col-10">
-                        <h5 class="font-weight-bold">Email</h5>
-                        <p class="grey-text"><br>{{company1.email}}</p>
-                    </div>
-                    <div class="col-2 mr-1">
-                            
-                        </div><button class="btn btn-light-blue" data-toggle="modal" data-target="#CompanyEditModal">EDIT INFO</button>
-                </div>
-        
-            </div>
-
-        
-        </div>
-
+                  </div>
+                        <h5 class="card-body">Privately Held</h5>
+                       
+                        <div class="card-body">
+                            <h5 class="card-title">10 - 50 Employees</h5>
+                            <h6 class="card-title"> Description : {{company1.about}}</h6>
+                        </div>
+                   
+                  </div>
         
         <hr>
         
@@ -107,9 +112,8 @@
                         <i class="fa fa-bar-chart fa-2x indigo-text"></i>
                     </div>
                     <div class="col-10">
-                        <h5 class="font-weight-bold"><a>Create Jobs Vacancies</a></h5>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda
-                            voluptate velit.</p>
+                        <h5 class="font-weight-bold" data-toggle="modal" data-target="#AddJobsModal" ><a>Create Jobs Vacancies</a></h5>
+                        <p class="grey-text">Add or post new jobs in your company.</p>
                     </div>
                 </div>
                 <!--Grid row-->
@@ -132,9 +136,8 @@
                         <i class="fa fa-smile-o fa-2x blue-text"></i>
                     </div>
                     <div class="col-10">
-                        <h5 class="font-weight-bold">Remove Jobs</h5>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda
-                            voluptate velit.</p>
+                        <h5 class="font-weight-bold" ><a (click)="showjobs()">Remove Jobs</a></h5>
+                        <p class="grey-text">Use this to remove the vacancies which have been filled.</p>
                     </div>
                 </div>
         
@@ -148,38 +151,6 @@
         
         </div>  
     </section>
-
-   <div>       
-        <h2 class="text-center mb-4">Create/Edit Jobs in company</h2>
-      
-        <div class="md-form">
-            <i class="fa fa-user prefix grey-text"></i>
-            <input type="text" id="orangeForm-name" class="form-control" name="name" [(ngModel)]="Company.name">
-            <label>Name</label>
-        </div>
-    
-        <div class="md-form">
-            <i class="fa fa-envelope prefix grey-text"></i>
-            <input type="text" id="orangeForm-email" class="form-control" name="email" [(ngModel)]="Company.email">
-            <label for="orangeForm-email">Email</label>
-        </div>
-      
-        <div class="md-form">
-            <i class="fa fa-lock prefix grey-text"></i>
-            <input type="text" id="orangeForm-pass" class="form-control" name="about" [(ngModel)]="Company.about">
-            <label for="orangeForm-pass">About</label>
-        </div>
-    
-         </div>
-    
-  <div class="text-center">
-        <button class="btn btn-deep-orange" (click)= "post_data(Company.name,Company.email,Company.about)" >Create / Company Save Details</button>
-        <button class="btn btn-deep-orange" (click)="postjobs()" >Create / Jobs in {{company1.name}}</button>
-        <button class="btn btn-deep-orange" >BACK</button>
-        <button (click)="showjobs()" class="btn btn-deep-orange" >View Jobs in {{company1.name}}</button>
-        <br>
-        <br>
-    </div>
     </div>
     <div class="row" *ngIf="!show">
                
@@ -206,7 +177,8 @@
           </tbody>
     
     </table>
-    <button (click)="view_candidates()"  class="btn btn-deep-orange" >BACK</button>
+    <button  class="btn btn-deep-orange" data-toggle="modal" data-target="#AddJobsModal" >Add / Update Jobs</button>
+    <button (click)="back()"  class="btn btn-deep-orange" >BACK</button>
     {{status}}
     </div>
   

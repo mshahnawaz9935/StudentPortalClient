@@ -16,13 +16,14 @@ import { Company } from './Company';
 
 
 export class CompaniesComponent implements OnInit {
-
+  education1 =[{ name: '', degree: '', field:'',description:'', grade: ''}];
+  
   company1 = { comp_id : 0 ,name : '', email :'', about:''};
   jobsdata=[];
   company_id;
   show = true;
   constructor(private http:Http , private DataService:DataService, private router:Router) {
-
+    this.DataService.candidateid = '';
     this.getcompany(this.DataService.UserId);
    }
 
@@ -70,6 +71,7 @@ getcompany(Emp_Id)
 }
 showjobs()
 {
+  this.show = false;
   let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
   , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); 
   let options       = new RequestOptions({ headers: headers }); // Create a request option
@@ -82,10 +84,7 @@ showjobs()
 }
 
 togglejobs = false;
-postjobs()
-{
-  this.show = false;
-}
+
 status = '';
 deletejobs(id)
 {
@@ -102,6 +101,9 @@ view_candidates(id)
   this.router.navigate(['/candidates']);
 
 }
-
+back()
+{
+  this.show = true;
+}
 
 }

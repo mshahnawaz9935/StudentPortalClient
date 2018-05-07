@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       ConfirmPassword : password,
       Role : role
     
-    };
+  };
     let bodyString = JSON.stringify(this.body); // Stringify payload
     console.log(bodyString);
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON

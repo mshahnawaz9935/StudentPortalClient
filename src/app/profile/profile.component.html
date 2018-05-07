@@ -5,22 +5,21 @@
     <h1 class="h1 pt-4">Manage Your Profile</h1>
 
             <div class="testimonial">
-                <!--Avatar-->
+                <!-- Avatar Photo -->
                 <div class="avatar mx-auto">
 
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" class="rounded-circle img-fluid" alt="First sample avatar image">
+                    <img  *ngIf="photo1.image_name.length == 0" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" class="rounded-circle img-fluid" alt="First sample avatar image">
 
+                    <img *ngIf="photo1.image_name.length > 0" [src]="photo1.image_name" class="rounded-circle img-fluid" alt="First sample avatar image">
+                    
                 </div>
           <br>
-                <p>
+          <p>   <!--    Summary -->
                     <i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae
                     quaerat ad velit ab. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore cum accusamus eveniet
                     molestias voluptatum inventore laboriosam labore sit, aspernatur praesentium iste impedit quidem dolor
                     veniam. <i class="fa fa-quote-right"></i></p><a data-toggle="modal" data-target="#orangeModalSubscription"><i class="fa fa-edit fa-3x" aria-hidden="true"></i></a>
 
-                    <h4>Shah Nawaz</h4>
-                    <h6>087542358</h6>
-                    <h6>Trinity College Dublin</h6>
                 <h4>{{profile1.Name}}</h4>
                 <h6>{{profile1.PhoneNumber}}</h6>
                 <h6>{{profile1.Address}}</h6>
@@ -33,11 +32,12 @@
                 <i class="fa fa-star-half-full"> </i>
             </div>
 </section>
-<!--Panel-->
-      <div class="input-file-container">  
+<!--Experience-->
+      <div *ngIf="photo1.image_name.length == 0" class="input-file-container">  
           <input class="input-file" id="my-file" type="file" [(ngModel)]="path" (change)="fileUpload($event)">
           <label tabindex="0" for="my-file"   class="input-file-trigger">Select a file...</label>
         </div>
+<div *ngIf="experience1[0].title.length == 0" >
 <div class="card text-center">
     <div class="card-header">
             <h4 class="card-title"><a>Add Your Work Experience</a></h4>
@@ -53,6 +53,10 @@
     </div>
 </div>
 <hr>
+</div>
+
+<!-- Education -->
+<div *ngIf="education1[0].name.length == 0" >
 <div class="card text-center">
         <div class="card-header">
                 <h4 class="card-title"><a>Education</a></h4>
@@ -67,6 +71,8 @@
             </div>
         </div>
     </div>
+    <hr>
+  </div>
 
 <div class="modal fade" id="orangeModalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-warning" role="document">
@@ -136,19 +142,19 @@
           </p>
         </div>
         <div class="md-form">
-                <input type="text" id="title" class="md-textarea form-control" [(ngModel)]="experience.title" />
+                <input type="text" name="title" class="md-textarea form-control" [(ngModel)]="experience.title" />
                 <label for="title">Title</label>
               </div>
         <div class="md-form">
-            <input type="text" id="title" class="md-textarea form-control"  [(ngModel)]="experience.company" />
+            <input type="text" name="company" class="md-textarea form-control"  [(ngModel)]="experience.company" />
              <label for="title">Company</label>
          </div>
          <div class="md-form">
-                <input type="text" id="title" class="md-textarea form-control" [(ngModel)]="experience.location" />
+                <input type="text" name="location" class="md-textarea form-control" [(ngModel)]="experience.location" />
                  <label for="title">Location</label>
              </div>
         <div class="md-form">
-          <textarea type="text" id="form79textarea" class="md-textarea form-control" rows="3"  [(ngModel)]="experience.description"></textarea>
+          <textarea type="text" name="description" class="md-textarea form-control" rows="3"  [(ngModel)]="experience.description"></textarea>
           <label for="form79textarea">Description</label>
         </div>
 
@@ -156,7 +162,7 @@
 
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" class="btn btn-primary waves-effect waves-light" (click)="post_experience(title, company,location,experience)">Save
+        <a type="button" class="btn btn-primary waves-effect waves-light" (click)="post_experience(experience.title,experience.company,experience.location,experience.description)">Save
           <i class="fa fa-paper-plane ml-1"></i>
         </a>
         <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Cancel</a>
@@ -193,23 +199,23 @@
           </p>
         </div>
         <div class="md-form">
-                <input type="text" id="school" class="md-textarea form-control" />
+                <input type="text" id="school" class="md-textarea form-control" [(ngModel)]="education.name" />
                 <label for="title">School</label>
               </div>
         <div class="md-form">
-            <input type="text" id="degree" class="md-textarea form-control" />
+            <input type="text" id="degree" class="md-textarea form-control" [(ngModel)]="education.degree"  />
              <label for="title">Degree</label>
          </div>
          <div class="md-form">
-                <input type="text" id="field" class="md-textarea form-control" />
+                <input type="text" id="field" class="md-textarea form-control" [(ngModel)]="education.field"  />
                  <label for="title">Field of Study</label>
              </div>
              <div class="md-form">
-                    <input type="text" id="grade" class="md-textarea form-control" />
+                    <input type="text"  [(ngModel)]="education.grade"  class="md-textarea form-control" />
                      <label for="title">Field of Grade</label>
                  </div>
         <div class="md-form">
-          <textarea type="text" id="form79textarea" class="md-textarea form-control" rows="3"></textarea>
+          <textarea type="text" [(ngModel)]="education.description" class="md-textarea form-control" rows="3"></textarea>
           <label for="form79textarea">Description</label>
         </div>
 
@@ -217,13 +223,61 @@
 
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" class="btn btn-primary waves-effect waves-light">Save
+        <a type="button" class="btn btn-primary waves-effect waves-light" (click)="post_education(education.name,education.grade,education.degree,education.field,education.description)">Save
           <i class="fa fa-paper-plane ml-1"></i>
         </a>
         <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Cancel</a>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Work Experience -->
+<div *ngIf="experience1[0].title.length > 0" >
+<div class="card text-left" *ngFor="let e of experience1">
+  <div class="card-header">
+          <h4 class="card-title"><a>Work Experience</a></h4>
+  </div>
+  <div class="row">
+  <div class="col-md-10">
+      <h4 class="card-body">{{e.title}}</h4>
+  </div>
+  <div class="col-md-2">
+      <a  class="card-body text-right" data-toggle="modal" data-target="#ExpModal"><i style="margin-top:15px;" class="fa fa-pencil prefix fa-2x"></i></a>
+  </div>
+</div>
+      <h5 class="card-body">{{e.company}}</h5>
+     
+      <div class="card-body">
+          <h5 class="card-title">{{e.location}}</h5>
+          <p class="card-text">	{{e.description}}</p>
+      </div>
+ 
+</div>
+<hr></div>
+
+<!-- Education -->
+<div *ngIf="education1[0].name.length > 0" >
+<div class="card text-left" *ngFor="let education1 of education1">
+  <div class="card-header">
+          <h4 class="card-title"><a>Education</a></h4>
+  </div>
+  <div class="row">
+  <div class="col-md-10">
+      <h4 class="card-body">{{education1.name}}</h4>
+  </div>
+  <div class="col-md-2">
+      <a  class="card-body text-right" data-toggle="modal" data-target="#EducationModal"><i style="margin-top:15px;" class="fa fa-pencil prefix fa-2x"></i></a>
+  </div>
+</div>
+      <h5 class="card-body">{{education1.degree}}</h5>
+     
+      <div class="card-body">
+          <h5 class="card-title">{{education1.date_to}} -- {{education1.date_from}}</h5>
+          <p class="card-text">	{{education1.description}}</p>
+      </div>
+ 
+</div><hr>
 </div>
 
     

@@ -4,12 +4,107 @@
   candidates works! and id is {{DataService.candidateid}}
 </p>
 
-<p>
-    Name : {{profile1.Name}}
-  </p>
-  <p>
-    Phone : {{profile1.PhoneNumber}}
-  </p>
-  <p>
-    Address : {{profile1.Address}}
-  </p></div>
+  <section class="text-center pb-5">
+      <h1 class="h1 pt-4">Manage Your Profile</h1>
+  
+              <div class="testimonial">
+                  <!-- Avatar Photo -->
+                  <div class="avatar mx-auto">
+  
+                      <img  *ngIf="photo1.image_name.length == 0" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" class="rounded-circle img-fluid" alt="First sample avatar image">
+  
+                      <img *ngIf="photo1.image_name.length > 0" [src]="photo1.image_name" class="rounded-circle img-fluid" alt="First sample avatar image">
+                      
+                  </div>
+            <br>
+            <p>   <!--    Summary -->
+                      <i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae
+                      quaerat ad velit ab. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore cum accusamus eveniet
+                      molestias voluptatum inventore laboriosam labore sit, aspernatur praesentium iste impedit quidem dolor
+                      veniam. <i class="fa fa-quote-right"></i></p><a data-toggle="modal" data-target="#orangeModalSubscription"><i class="fa fa-edit fa-3x" aria-hidden="true"></i></a>
+  
+                  <h4>{{profile1.Name}}</h4>
+                  <h6>{{profile1.PhoneNumber}}</h6>
+                  <h6>{{profile1.Address}}</h6>
+  
+                  <!--Review-->
+                  <i class="fa fa-star"> </i>
+                  <i class="fa fa-star"> </i>
+                  <i class="fa fa-star"> </i>
+                  <i class="fa fa-star"> </i>
+                  <i class="fa fa-star-half-full"> </i>
+              </div>
+  </section>
+  <!--Experience-->
+  <div *ngIf="experience1[0].title.length == 0" >
+  <div class="card text-center">
+      <div class="card-header">
+              <h4 class="card-title"><a>No Work Experience filled up by candidate</a></h4>
+      </div>
+  </div>
+  <hr>
+  </div>
+  
+  <!-- Education -->
+  <div *ngIf="education1[0].name.length == 0" >
+  <div class="card text-center">
+          <div class="card-header">
+                  <h4 class="card-title"><a>Nothing about Education in the profile</a></h4>
+          </div>
+      </div>
+      <hr>
+    </div>
+ 
+  
+  <!-- Work Experience -->
+  <div *ngIf="experience1[0].title.length > 0" >
+  <div class="card text-left" *ngFor="let e of experience1">
+    <div class="card-header">
+            <h4 class="card-title"><a>Work Experience</a></h4>
+    </div>
+    <div class="row">
+    <div class="col-md-10">
+        <h4 class="card-body">{{e.title}}</h4>
+    </div>
+    <div class="col-md-2">
+        <a  class="card-body text-right" data-toggle="modal" data-target="#ExpModal"><i style="margin-top:15px;" class="fa fa-pencil prefix fa-2x"></i></a>
+    </div>
+  </div>
+        <h5 class="card-body">{{e.company}}</h5>
+       
+        <div class="card-body">
+            <h5 class="card-title">{{e.location}}</h5>
+            <p class="card-text">	{{e.description}}</p>
+        </div>
+   
+  </div>
+  <hr></div>
+  
+  <!-- Education -->
+  <div *ngIf="education1[0].name.length > 0" >
+  <div class="card text-left" *ngFor="let education1 of education1">
+    <div class="card-header">
+            <h4 class="card-title"><a>Education</a></h4>
+    </div>
+    <div class="row">
+    <div class="col-md-10">
+        <h4 class="card-body">{{education1.name}}</h4>
+    </div>
+    <div class="col-md-2">
+        <a  class="card-body text-right" data-toggle="modal" data-target="#EducationModal"><i style="margin-top:15px;" class="fa fa-pencil prefix fa-2x"></i></a>
+    </div>
+  </div>
+        <h5 class="card-body">{{education1.degree}}</h5>
+       
+        <div class="card-body">
+            <h5 class="card-title">{{education1.date_to}} -- {{education1.date_from}}</h5>
+            <p class="card-text">	{{education1.description}}</p>
+        </div>
+   
+  </div><hr>
+  </div>
+  
+      
+  
+  </div>
+  

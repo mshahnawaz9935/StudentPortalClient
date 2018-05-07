@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {  Http , RequestOptions, Headers, Response } from '@angular/http'; 
 import { Profile } from './Profile';
+import {Photo} from './Photo';
 import { Experience } from './Experience';
 import { Education } from './Education';
 import { URLSearchParams} from '@angular/http';
@@ -19,12 +20,16 @@ export class ProfileComponent implements OnInit {
 
   role = false;
   path = '';
-  profile1 ={ Name: '', Address: '', PhoneNumber:'',Role:''};
+  profile1 ={ Name: 'Shahnawaz', Address: 'Mountjoy', PhoneNumber:'08723533',Role:''};
+  experience1 =[{ title: '', company: '', location:'',description:'', currentjob: false}];
+  education1 =[{ name: '', degree: '', field:'',description:'', grade: ''}];
+  photo1 = { studentid : '', image_name:'' };
   experience = new Experience('','','','',false);
   education = new Education('','','','','');
 
   profile = new Profile('','','');
   constructor(private http:Http , private DataService:DataService) {
+    console.log(this.photo1.image_name.length);
 
     this.get_profile();
     
@@ -32,6 +37,8 @@ export class ProfileComponent implements OnInit {
   {
     console.log(this.DataService.access_token,' ID ',this.DataService.UserId);
     this.get_experience(this.DataService.UserId);
+    this.get_education(this.DataService.UserId);
+    this.getphoto(this.DataService.UserId);
   },2000);
    
   }
@@ -86,8 +93,9 @@ export class ProfileComponent implements OnInit {
 
     this.http.get('http://localhost:55899/api/ExperiencesAPI/GetExperience_By_Id/' + stud_id, options)
         .map((response : Response) => response.json()).subscribe((Serverdata) => {
-                                console.log('Experience Data is ' + Serverdata , Serverdata.Id);
-                                this.experience = Serverdata;
+                            //    console.log('Experience Data is ' + Serverdata , Serverdata.Id);
+                                this.experience1= Serverdata;
+                                console.log('Experience data is'+ this.experience1[0] + this.experience1[0].company + Serverdata[0].company);
                                 
    });
   }
@@ -97,14 +105,11 @@ export class ProfileComponent implements OnInit {
     , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); 
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-    this.http.get('http://localhost:55899/api/Account/UserInfo', options)
+    this.http.get('http://localhost:55899/api/EducationsAPI/GetEducation_By_Id/'+ stud_id, options)
         .map((response : Response) => response.json()).subscribe((Serverdata) => {
-                                console.log('Profile Data is ' + Serverdata , Serverdata.Id);
-                                this.profile1 = Serverdata;
-                                this.DataService.UserId = Serverdata.Id;
-
-                                if(this.profile1.Role == 'Employer')
-                                  this.role = true;
+                                console.log('Education Data is ' + Serverdata);
+                                this.education1 = Serverdata;
+                               
                                 
    });
   }
@@ -116,6 +121,7 @@ export class ProfileComponent implements OnInit {
     body.set('company', company);
     body.set('location', location);
     body.set('description', description);
+    body.set('studentid' ,this.DataService.UserId);
     body.has('currentjob');
    // let bodyString = JSON.stringify(this.body); // Stringify payload
     console.log(body);
@@ -128,60 +134,66 @@ export class ProfileComponent implements OnInit {
                      .catch((error) => Observable.throw(error.error || 'Server error'))
                      .subscribe((Serverdata) => {
                           console.log('Data is ' + Serverdata );
-                          this.get_profile();
                     })
   }
-  post_education(name, PhoneNumber,Address)
+  post_education(name, grade, degree, field, description)
   {
-    console.log('name is', name,Address, PhoneNumber);
+    console.log('name is', name, grade, field ,grade ,description);
     const body = new URLSearchParams();
-    body.set('Name', name);
-    body.set('PhoneNumber', PhoneNumber);
-    body.set('Address', Address);
+    body.set('name', name);
+    body.set('grade', grade);
+    body.set('degree', degree);
+    body.set('field', field);
+    body.set('studentid' ,this.DataService.UserId);
+    body.set('description', description);
    // let bodyString = JSON.stringify(this.body); // Stringify payload
     console.log(body);
     let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
     , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-    this.http.post('http://localhost:55899/api/Account/EditProfile', body, options) // ...using post request
-                     .map((res:Response) => res) // ...and calling .json() on the response to return data
-                     .catch((error) => Observable.throw(error.error || 'Server error'))
-                     .subscribe((Serverdata) => {
-                          console.log('Data is ' + Serverdata );
-                          this.get_profile();
-                    })
+    this.http.post('http://localhost:55899/api/EducationsAPI', body, options) // ...using post request
+    .map((res:Response) => res) // ...and calling .json() on the response to return data
+    .catch((error) => Observable.throw(error.error || 'Server error'))
+    .subscribe((Serverdata) => {
+         console.log('Data is ' + Serverdata );
+   })
   }
   fileUpload(event)
   {
     let headers      = new Headers({
      'Authorization':'Bearer '+ this.DataService.access_token+'' });
 
-    let options       = new RequestOptions({ headers: headers });
+    let options= new RequestOptions({ headers: headers });
 
     let formData:FormData = new FormData();
-   // formData.append('files', files[0], files[0].name);
+ 
    let fileList: FileList = event.target.files;  
    let file  = fileList[0];
    console.log(this.path , file, file.name);
    formData.append('name', file.name);
-   formData.append('studentid', 'a0f3434' );
+   formData.append('studentid', this.DataService.UserId );
    formData.append('file', file );
-  //   const body = new URLSearchParams();
   
-  //  // let bodyString = JSON.stringify(this.body); // Stringify payload
-  //   console.log(body);
-  //   let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
-  //   , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); // ... Set content type to JSON
-  //   let options       = new RequestOptions({ headers: headers }); // Create a request option
-
     this.http.post('http://localhost:55899/api/PhotosAPI', formData, options) // ...using post request
                      .map((res:Response) => res) // ...and calling .json() on the response to return data
                      .catch((error) => Observable.throw(error.error || 'Server error'))
                      .subscribe((Serverdata) => {
-                          console.log('Data is ' + Serverdata );
-                          this.get_profile();
+                          console.log('Photo Status is ' + Serverdata );  
+                          this.getphoto(this.DataService.UserId);
                     })
   }
+  getphoto(id)
+  {
+    let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
+    , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); 
+    let options       = new RequestOptions({ headers: headers }); // Create a request option
 
+    this.http.get('http://localhost:55899/api/PhotosAPI/GetPhoto_By_Id/'+ this.DataService.UserId, options)
+        .map((response : Response) => response.json()).subscribe((Serverdata) => {
+                                console.log('Photo Data is ' + Serverdata );
+                                this.photo1 = Serverdata;
+                                this.photo1.image_name = "Scripts/Images/"+ this.photo1.image_name;              
+   });
+  }
 }
