@@ -193,7 +193,7 @@ export class ProfileComponent implements OnInit {
         .map((response : Response) => response.json()).subscribe((Serverdata) => {
                                 console.log('Photo Data is ' + Serverdata );
                                 this.photo1 = Serverdata;
-                                this.photo1.image_name = "Scripts/Images/"+ this.photo1.image_name;              
+                                this.photo1.image_name = "Scripts/dist/assets/Images/"+ this.photo1.image_name;              
    });
   }
 }
