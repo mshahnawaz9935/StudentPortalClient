@@ -7,6 +7,7 @@ import { DataService} from '../DataService';
 import { Router } from '@angular/router';
 import {  Http , RequestOptions, Headers, Response } from '@angular/http'; 
 import { Company } from './Company';
+declare var jQuery:any;
 
 @Component({
   selector: 'app-companies',
@@ -17,7 +18,7 @@ import { Company } from './Company';
 
 export class CompaniesComponent implements OnInit {
   education1 =[{ name: '', degree: '', field:'',description:'', grade: ''}];
-  
+  post_or_update;
   company1 = { comp_id : 0 ,name : '', email :'', about:''};
   jobsdata=[];
   company_id;
@@ -33,23 +34,43 @@ export class CompaniesComponent implements OnInit {
   body;
   post_data( name, email, about)
   {
-    console.log('name is', name, email, about);
-
-    this.body = {  Name: name , Email: email ,
+    this.body = {  name: name , email: email ,
       about : about , Emp_Id: this.DataService.UserId
     
     };
+       
     let bodyString = JSON.stringify(this.body); // Stringify payload
     console.log(bodyString);
     let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options       = new RequestOptions({ headers: headers }); // Create a request option
+    if(this.company1.name == '')
+    {
+    console.log('name is', name, email, about, 'Posting');
 
     this.http.post('http://localhost:55899/api/CompaniesAPI', this.body, options) // ...using post request
                      .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
                      .catch((error) => Observable.throw(error.json().error || 'Server error'))
                      .subscribe((Serverdata) => {
                           console.log('Data is ' + Serverdata );
+                          this.getcompany(this.DataService.UserId);
                     })
+    }
+    else {
+      console.log('name is', name, email, about, 'updating');
+      this.body = {  name: name , email: email ,
+        about : about , Emp_Id: this.DataService.UserId , id: this.company_id
+      
+      };
+      this.http.put('http://localhost:55899/api/CompaniesAPI/'+this.company_id, this.body, options) // ...using put request
+                         .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+                         .subscribe((Serverdata) => {
+                          console.log('Updated data is ' + Serverdata );
+                          this.getcompany(this.DataService.UserId);
+                          jQuery("#CompanyEditModal").modal("hide");
+                    })
+
+    }
 }
 
 getcompany(Emp_Id)
@@ -63,10 +84,7 @@ getcompany(Emp_Id)
                               console.log('Profile Data is ' + Serverdata , Serverdata.Id);
                               this.company1 = Serverdata;
                               this.company_id = Serverdata.id;
-                              this.Company = this.company1;
-                              console.log('Company id', this.company_id);
-
-                              
+                              console.log('Company id', this.company_id);                          
  });
 }
 showjobs()

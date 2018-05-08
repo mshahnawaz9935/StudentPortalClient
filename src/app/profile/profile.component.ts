@@ -70,8 +70,8 @@ export class ProfileComponent implements OnInit {
 
   get_profile()
   {
-    let headers      = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
-    , 'Authorization':'Bearer '+ this.DataService.access_token+'' }); 
+    let headers      = new Headers({// 'Content-Type': 'application/x-www-form-urlencoded' ,
+     'Authorization':'Bearer '+ this.DataService.access_token+'' }); 
     let options       = new RequestOptions({ headers: headers }); // Create a request option
 
     this.http.get('http://localhost:55899/api/Account/UserInfo', options)
