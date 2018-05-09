@@ -2,6 +2,7 @@ import {  Http , RequestOptions, Headers, Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import { DataService } from '../DataService';
 import 'rxjs/add/operator/catch';
 
 @Component({
@@ -14,7 +15,7 @@ export class JobsComponent implements OnInit {
 
   data;
   companies;
-  constructor(private http:Http ) {
+  constructor(private http:Http , private DataService : DataService  ) {
 
     this.http.get('http://localhost:55899/api/CompaniesAPI')
               .map((response : Response) => response.json()).subscribe((Serverdata) => {
@@ -70,7 +71,8 @@ export class JobsComponent implements OnInit {
   body;
   apply(companyid, jobid)
   { 
-        console.log('here');
+        if(this.DataService.loggedIN == true)
+        {
         this.body = {  studentid: '3000' , companyid: companyid , jobid : jobid, applydate : '13/8/2017' };
         let bodyString = JSON.stringify(this.body); // Stringify payload
         let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -83,6 +85,10 @@ export class JobsComponent implements OnInit {
                               console.log('Data is ' + Serverdata );
                         })
                           //...errors if any
+                      }
+                      else{
+                        alert('Login or create an account to apply');
+                      }
    
 
   }

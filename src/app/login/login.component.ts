@@ -17,7 +17,13 @@ export class LoginComponent implements OnInit {
 
   model = new User('', '','','');
   show= true;
-  constructor(private http:Http, private DataService:DataService,private router:Router) { }
+  constructor(private http:Http, private DataService:DataService,private router:Router) {
+    if(this.DataService.loggedIN == true)
+    {
+      console.log('Login status is', this.DataService.loggedIN );
+      this.router.navigate['/profile'];
+    }
+   }
 
   ngOnInit() {
   }

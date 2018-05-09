@@ -19,11 +19,11 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent  },
   { path: 'home', component: HomeComponent },
     { path: 'jobs', component: JobsComponent },
-       { path: 'companies', component: CompaniesComponent },
+       { path: 'companies', component: CompaniesComponent , canActivate: [AuthGuard] },
           { path: 'login', component: LoginComponent },
-             { path: 'profile', component: ProfileComponent },// canActivate: [AuthGuard] },
-                { path: 'appliedjobs', component: AppliedjobsComponent },
-                { path: 'candidates', component: CandidatesComponent },
+             { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard] },
+                { path: 'appliedjobs', component: AppliedjobsComponent , canActivate: [AuthGuard]  },
+                { path: 'candidates', component: CandidatesComponent , canActivate: [AuthGuard] },
 
 ];
 

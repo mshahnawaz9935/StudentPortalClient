@@ -7,6 +7,7 @@ import { DataService} from '../DataService';
 import { Router } from '@angular/router';
 import {  Http , RequestOptions, Headers, Response } from '@angular/http'; 
 import { Company } from './Company';
+import { Job } from '../jobs/Job';
 declare var jQuery:any;
 
 @Component({
@@ -31,6 +32,7 @@ export class CompaniesComponent implements OnInit {
   ngOnInit() {
   }
   Company = new Company(0,'','','');
+  Job = new Job('','','','');
   body;
   post_data( name, email, about)
   {
@@ -53,6 +55,7 @@ export class CompaniesComponent implements OnInit {
                      .subscribe((Serverdata) => {
                           console.log('Data is ' + Serverdata );
                           this.getcompany(this.DataService.UserId);
+                          alert('Company Created Successfully');
                     })
     }
     else {
@@ -67,10 +70,35 @@ export class CompaniesComponent implements OnInit {
                          .subscribe((Serverdata) => {
                           console.log('Updated data is ' + Serverdata );
                           this.getcompany(this.DataService.UserId);
+                          alert('Company information updated successfully');
                           jQuery("#CompanyEditModal").modal("hide");
                     })
 
     }
+}
+createjob(title,description,date)
+{
+  this.body = {  title: title , description: description ,
+    date : date , companyid: this.company_id
+  
+  };
+     
+  let bodyString = JSON.stringify(this.body); // Stringify payload
+  console.log(bodyString);
+  let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+  let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+  console.log(this.body);
+
+  this.http.post('http://localhost:55899/api/JobsAPI', this.body, options) // ...using post request
+                   .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+                   .catch((error) => Observable.throw(error.json().error || 'Server error'))
+                   .subscribe((Serverdata) => {
+                        console.log('Jobs is ' + Serverdata );
+                           alert('Job Posted Successfully');
+                  })
+  jQuery("#AddJobsModal").modal("hide");
+
 }
 
 getcompany(Emp_Id)

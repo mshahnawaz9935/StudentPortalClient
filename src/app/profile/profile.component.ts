@@ -7,6 +7,7 @@ import { Education } from './Education';
 import { URLSearchParams} from '@angular/http';
 import { DataService} from '../DataService';
 import { Observable} from 'rxjs/Observable';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
   education = new Education('','','','','');
 
   profile = new Profile('','','');
-  constructor(private http:Http , private DataService:DataService) {
+  constructor(private http:Http , private DataService:DataService, private router : Router) {
     console.log(this.photo1.image_name.length);
 
     this.get_profile();
@@ -81,7 +82,10 @@ export class ProfileComponent implements OnInit {
                                 this.DataService.UserId = Serverdata.Id;
 
                                 if(this.profile1.Role == 'Employer')
-                                  this.role = true;
+                                {
+                                  console.log('Redirect');
+                                this.router.navigate(['/companies']);
+                                }
                                 
    });
   }
