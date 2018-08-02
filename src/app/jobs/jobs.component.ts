@@ -14,6 +14,7 @@ import 'rxjs/add/operator/catch';
 export class JobsComponent implements OnInit {
 
   data;
+  searchdata;
   companies;
   constructor(private http:Http , private DataService : DataService  ) {
 
@@ -66,6 +67,7 @@ export class JobsComponent implements OnInit {
 
 
   ngOnInit() {
+    this.searchdata=['Delhi','Kerala','Tamil Nadu','Banglore','Uttar Pradesh','Noida','Haryana','Thrissur'];
   }
       
   body;

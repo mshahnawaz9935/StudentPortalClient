@@ -1,29 +1,38 @@
 <div class="container">
+        <div class="row">
+                
+        </div>
     <nav class="navbar navbar-dark default-color">
-        <form class="form-inline">
-              <div class="md-form my-0">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              </div>
-              <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
-          </form>
+            <div class="col-md-5">
+                    <input class="form-control mr-sm-2" type="text"[(ngModel)]="curPlace" placeholder="Search" aria-label="Search">
+                    <ul>  
+                            <li  *ngFor="let place in placesVisited | filter:curPlace">  
+                                <a ng-href="https://www.google.co.in/webhp?q={{place}}">{{place}} </a>  
+                            </li>  
+                        </ul>  
+                </div>
+                <div class="col-md-7">
+                        <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+                    </div>
     </nav>
     
 			<div>
         <div class="jumbotron">
           <div  *ngFor="let job of data">
           <h3 class="h3-responsive">{{job.name}}</h3>
-          <p class="lead"> {{job.title}}<br>
+          <p > {{job.title}}<br>
           Ireland</p>
      
           <p>It uses utility classes for typography and spacing to space content out within the larger
               container.
           </p>
-          <a class="btn btn-primary btn-md" role="button" (click) = "apply(job.companyid, job.id)">Easy Apply</a>
+          <a class="btn btn-primary btn-md" role="button" (click) = "apply(job.companyid, job.id)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                  &nbsp;&nbsp;Easy Apply</a>
           <hr class="my-2">
           </div>
       </div>
       </div>
-            <div class="row">
+            <!-- <div class="row">
                 <table id="table" class="table table-striped table-bordered">
                   <thead>
                     <tr>
@@ -48,5 +57,5 @@
                   </tbody>
 
             </table>
-        </div>
+        </div> -->
     </div>
